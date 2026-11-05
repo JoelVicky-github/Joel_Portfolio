@@ -16,7 +16,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 ###### \## **🚀 Live Demo \& Preview**
 
-\* \*\*Portfolio Website:\*\* \*(Add your GitHub Pages URL here once enabled, e.g., `https://joelvicky-github.github.io/Joel\_Portfolio/`)\*
+\* \*\*Portfolio Website:\*\* \*(Add your GitHub Pages URL here once enabled, e.g., `https://joelvicky-github.github.io/Joel_Portfolio/`)\*
 
 
 
