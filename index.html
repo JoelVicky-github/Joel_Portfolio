@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel Vicky | Player Profile & Portfolio</title>
+    <!-- Google Fonts: Orbitron for retro arcade headers, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Game HUD Top Navigation -->
+    <header class="hud-nav" id="hudNav">
+        <div class="hud-container">
+            <a href="#hero" class="hud-logo">PLAYER://JOEL_VICKY</a>
+            <nav class="hud-links">
+                <a href="#about" class="hud-link">[01] STATS</a>
+                <a href="#skills" class="hud-link">[02] SKILLS</a>
+                <a href="#projects" class="hud-link">[03] QUEST_LOG</a>
+                <a href="#certs" class="hud-link">[04] BADGES</a>
+                <a href="#contact" class="hud-link">[05] PARTY</a>
+            </nav>
+            <button id="soundToggle" class="sound-btn" aria-label="Toggle UI Sound Effects" title="Toggle UI Sound">🔊 SFX: OFF</button>
+        </div>
+        <!-- Scroll XP Bar -->
+        <div class="xp-bar-container">
+            <div class="xp-bar-fill" id="xpBar"></div>
+        </div>
+    </header>
+
+    <!-- Hero Section (Game Start Screen) -->
+    <section id="hero" class="hero-section">
+        <div class="cyber-grid"></div>
+        <div class="hero-content">
+            <div class="arcade-tag">PRESS START TO INITIALIZE</div>
+            <h1 class="hero-title glitch" data-text="JOEL VICKY">JOEL VICKY</h1>
+            <p class="hero-subtitle" id="typedHeadline">&gt; Aspiring AI-driven Full Stack Developer (learning in public)</p>
+            <div class="hero-actions">
+                <a href="#projects" class="arcade-btn primary-btn">VIEW QUESTS</a>
+                <a href="#contact" class="arcade-btn secondary-btn">JOIN PARTY</a>
+            </div>
+        </div>
+        <div class="scroll-prompt">
+            <span>SCROLL DOWN</span>
+            <div class="arrow-down"></div>
+        </div>
+    </section>
+
+    <!-- About Section (Character Sheet) -->
+    <section id="about" class="section-container">
+        <div class="section-header">
+            <span class="section-num">01 //</span>
+            <h2>CHARACTER_SHEET.dat</h2>
+        </div>
+        <div class="char-sheet-grid">
+            <div class="avatar-card">
+                <div class="avatar-frame">
+                    <!-- Replace avatar.png inside assets/ with your own picture -->
+                    <img src="assets/avatar.png" alt="Joel Vicky Avatar Placeholder" class="avatar-img">
+                    <div class="level-badge">LVL 02</div>
+                </div>
+                <div class="player-meta">
+                    <h3>Joel Vicky</h3>
+                    <p class="meta-role">IT Support Specialist &rarr; AI Dev</p>
+                </div>
+            </div>
+            <div class="char-stats-card">
+                <div class="stat-row">
+                    <span class="stat-label">CLASS:</span>
+                    <span class="stat-val">IT Infrastructure Support &rarr; AI Full Stack Dev</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">EXP:</span>
+                    <span class="stat-val">~2 Years Enterprise Tech Support (ServiceNow, Windows, M365, Active Directory)</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">EDUCATION:</span>
+                    <span class="stat-val">BCA Graduate</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">CURRENT QUEST:</span>
+                    <span class="stat-val">Mastering AI/LLM integration, backend logic, and full-stack architecture.</span>
+                </div>
+                <p class="char-lore">
+                    Transitioning from frontline IT infrastructure support into software development and AI engineering. I leverage my robust troubleshooting background to build stable applications, harness Python/Machine Learning basics, and learn new technologies in public.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section (Skill Tree / XP Bars) -->
+    <section id="skills" class="section-container">
+        <div class="section-header">
+            <span class="section-num">02 //</span>
+            <h2>SKILL_TREE.tree</h2>
+        </div>
+        <div class="skills-grid">
+            <!-- Frontend -->
+            <div class="skill-category-card">
+                <h3>FRONTEND_CORE</h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span>HTML / CSS / JavaScript</span><span>Mid-Level (Intermediate)</span></div>
+                    <div class="xp-track"><div class="xp-fill" style="width: 65%;"></div></div>
+                </div>
+            </div>
+            <!-- Python & AI -->
+            <div class="skill-category-card">
+                <h3>PYTHON & AI</h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Python (Pandas, Scikit-Learn, Streamlit)</span><span>Beginner+</span></div>
+                    <div class="xp-track"><div class="xp-fill" style="width: 45%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>AI / LLM Integration</span><span>Exploring</span></div>
+                    <div class="xp-track"><div class="xp-fill" style="width: 30%;"></div></div>
+                </div>
+            </div>
+            <!-- Tools & Infrastructure -->
+            <div class="skill-category-card">
+                <h3>INFRA & TOOLS</h3>
+                <div class="skill-item">
+                    <div class="skill-info"><span>Git & GitHub / VS Code</span><span>Intermediate</span></div>
+                    <div class="xp-track"><div class="xp-fill" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info"><span>IT Support / Windows / M365 / AD</span><span>Advanced</span></div>
+                    <div class="xp-track"><div class="xp-fill" style="width: 85%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section (Quest Log) -->
+    <section id="projects" class="section-container">
+        <div class="section-header">
+            <span class="section-num">03 //</span>
+            <h2>QUEST_LOG.log</h2>
+        </div>
+        <div class="quests-grid">
+            
+            <!-- Flagship Project: AI Support Ticket Classifier -->
+            <div class="quest-card flagship-quest">
+                <div class="quest-badge completed">FLAGSHIP QUEST</div>
+                <div class="quest-image-placeholder">
+                    <!-- Drop project screenshot in assets/ticket-classifier.png -->
+                    <img src="assets/ticket-classifier.png" alt="AI Support Ticket Classifier Screenshot" onerror="this.src='data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\'><rect width=\'100%\' height=\'100%\' fill=\'%23121420\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%2300f0ff\' font-family=\'Orbitron\' font-size=\'20\'>AI TICKET CLASSIFIER PREVIEW</text></svg>'">
+                </div>
+                <div class="quest-body">
+                    <h3>AI Support Ticket Classifier</h3>
+                    <p class="quest-desc">Classifies support tickets into Account, Technical, or Billing categories with confidence scores using TF-IDF + Logistic Regression and a Streamlit UI.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>Scikit-Learn</span><span>Streamlit</span><span>Joblib</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://github.com/JoelVicky-github/ai-support-ticket-classifier" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub Repo]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2: Birthday Invite Page -->
+            <div class="quest-card">
+                <div class="quest-badge completed">COMPLETED</div>
+                <div class="quest-body">
+                    <h3>Birthday Invite Page</h3>
+                    <p class="quest-desc">A festive event invitation landing page built with clean HTML and CSS styling.</p>
+                    <div class="tech-tags">
+                        <span>HTML5</span><span>CSS3</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://joelvicky-github.github.io/HTML-portfolio/public/birthday-invite.html" target="_blank" rel="noopener" class="quest-link-btn demo-btn">[Live Demo]</a>
+                        <a href="https://github.com/JoelVicky-github/HTML-portfolio" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3: Movie Ranking Page -->
+            <div class="quest-card">
+                <div class="quest-badge completed">COMPLETED</div>
+                <div class="quest-body">
+                    <h3>Movie Ranking Page</h3>
+                    <p class="quest-desc">A curated ranking list of top films styled with semantic HTML structure and CSS.</p>
+                    <div class="tech-tags">
+                        <span>HTML5</span><span>CSS3</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://joelvicky-github.github.io/HTML-portfolio/public/movie-ranking.html" target="_blank" rel="noopener" class="quest-link-btn demo-btn">[Live Demo]</a>
+                        <a href="https://github.com/JoelVicky-github/HTML-portfolio" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4: KPSC Replica -->
+            <div class="quest-card">
+                <div class="quest-badge completed">COMPLETED</div>
+                <div class="quest-body">
+                    <h3>KPSC Replica</h3>
+                    <p class="quest-desc">A structured layout clone mirroring official public service portal design patterns.</p>
+                    <div class="tech-tags">
+                        <span>HTML5</span><span>CSS3</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://github.com/JoelVicky-github/KPSC_Replica" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub Repo]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 5: Cyber Services Website -->
+            <div class="quest-card">
+                <div class="quest-badge completed">COMPLETED</div>
+                <div class="quest-body">
+                    <h3>Cyber Services Website</h3>
+                    <p class="quest-desc">Home page interface designed for a cybersecurity and IT services agency.</p>
+                    <div class="tech-tags">
+                        <span>HTML5</span><span>CSS3</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://github.com/JoelVicky-github/Cyber_Services_Website" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub Repo]</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 6: Python Foundations -->
+            <div class="quest-card">
+                <div class="quest-badge in-progress">ACTIVE / LEARNING</div>
+                <div class="quest-body">
+                    <h3>Python Foundations</h3>
+                    <p class="quest-desc">Practice scripts and exercises completed while mastering Cisco Python Essentials 1.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>Cisco Essentials</span>
+                    </div>
+                    <div class="quest-links">
+                        <a href="https://github.com/JoelVicky-github/python-foundations" target="_blank" rel="noopener" class="quest-link-btn github-btn">[GitHub Repo]</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Certifications Section (Achievements / Badges) -->
+    <section id="certs" class="section-container">
+        <div class="section-header">
+            <span class="section-num">04 //</span>
+            <h2>ACHIEVEMENTS.bad</h2>
+        </div>
+        <div class="achievements-grid">
+            <div class="badge-card">
+                <div class="badge-icon">🛡️</div>
+                <div class="badge-info">
+                    <h4>ITIL 4 Foundation</h4>
+                    <p>Certified by PeopleCert (IT Service Management framework)</p>
+                </div>
+            </div>
+            <div class="badge-card">
+                <div class="badge-icon">☁️</div>
+                <div class="badge-info">
+                    <h4>AWS Academy Cloud Foundations</h4>
+                    <p>Cloud architecture and core AWS services proficiency</p>
+                </div>
+            </div>
+            <div class="badge-card">
+                <div class="badge-icon">⚡</div>
+                <div class="badge-info">
+                    <h4>AWS Practitioner Essentials</h4>
+                    <p>Foundational cloud concepts and security models</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (Join My Party) -->
+    <section id="contact" class="section-container">
+        <div class="section-header">
+            <span class="section-num">05 //</span>
+            <h2>JOIN_MY_PARTY.net</h2>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-text">
+                <p>Looking to collaborate, hire, or discuss AI, Python, or IT infrastructure? Send a transmission across the network or connect via secure channels below.</p>
+                <div class="social-links-box">
+                    <a href="https://github.com/JoelVicky-github" target="_blank" rel="noopener" class="social-btn">[GitHub]</a>
+                    <a href="https://linkedin.com/in/joel-vicky-y" target="_blank" rel="noopener" class="social-btn">[LinkedIn]</a>
+                    <a href="mailto:joelvickyy@gmail.com" class="social-btn">[Email]</a>
+                </div>
+            </div>
+            <div class="contact-form-box">
+                <!-- Working frontend contact form (Formspree placeholder action or mailto fallback) -->
+                <form id="contactForm" action="https://formspree.io/f/joelvickyy@gmail.com" method="POST">
+                    <div class="form-group">
+                        <label for="senderName">&gt; YOUR_NAME:</label>
+                        <input type="text" id="senderName" name="name" required placeholder="Enter name...">
+                    </div>
+                    <div class="form-group">
+                        <label for="senderEmail">&gt; YOUR_EMAIL:</label>
+                        <input type="email" id="senderEmail" name="email" required placeholder="Enter email...">
+                    </div>
+                    <div class="form-group">
+                        <label for="senderMessage">&gt; TRANSMISSION_MESSAGE:</label>
+                        <textarea id="senderMessage" name="message" rows="4" required placeholder="Type message..."></textarea>
+                    </div>
+                    <button type="submit" class="arcade-btn primary-btn submit-btn">TRANSMIT MESSAGE</button>
+                    <p id="formStatus" class="form-status"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 JOEL VICKY // PLAYER ONE. BUILT WITH RETRO GAMING &amp; AI SPIRIT.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
