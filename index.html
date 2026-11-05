@@ -12,18 +12,26 @@
 </head>
 <body>
 
+    <!-- Background Music Audio Element (Place your music file at assets/bgm.mp3) -->
+    <audio id="bgMusic" src="assets/bgm.mp3" loop preload="auto"></audio>
+
     <!-- Game HUD Top Navigation -->
     <header class="hud-nav" id="hudNav">
         <div class="hud-container">
-            <a href="#hero" class="hud-logo">PLAYER://JOEL_VICKY</a>
-            <nav class="hud-links">
+            <div class="hud-top-bar">
+                <a href="#hero" class="hud-logo">PLAYER://JOEL_VICKY</a>
+                <div class="hud-controls">
+                    <button id="bgmToggle" class="sound-btn active" aria-label="Toggle Background Music" title="Toggle Background Music">🎵 BGM: ON</button>
+                    <button id="soundToggle" class="sound-btn active" aria-label="Toggle UI Sound Effects" title="Toggle UI Sound">🔊 SFX: ON</button>
+                </div>
+            </div>
+            <nav class="hud-links" aria-label="Main Navigation">
                 <a href="#about" class="hud-link">[01] STATS</a>
                 <a href="#skills" class="hud-link">[02] SKILLS</a>
                 <a href="#projects" class="hud-link">[03] QUEST_LOG</a>
                 <a href="#certs" class="hud-link">[04] BADGES</a>
                 <a href="#contact" class="hud-link">[05] PARTY</a>
             </nav>
-            <button id="soundToggle" class="sound-btn" aria-label="Toggle UI Sound Effects" title="Toggle UI Sound">🔊 SFX: OFF</button>
         </div>
         <!-- Scroll XP Bar -->
         <div class="xp-bar-container">
@@ -58,8 +66,7 @@
         <div class="char-sheet-grid">
             <div class="avatar-card">
                 <div class="avatar-frame">
-                    <!-- Replace avatar.png inside assets/ with your own picture -->
-                    <img src="assets/avatar.png" alt="Joel Vicky Avatar Placeholder" class="avatar-img">
+                    <img src="assets/avatar.png" alt="Joel Vicky Avatar" class="avatar-img">
                     <div class="level-badge">LVL 02</div>
                 </div>
                 <div class="player-meta">
@@ -102,7 +109,7 @@
             <div class="skill-category-card">
                 <h3>FRONTEND_CORE</h3>
                 <div class="skill-item">
-                    <div class="skill-info"><span>HTML / CSS / JavaScript</span><span>Mid-Level (Intermediate)</span></div>
+                    <div class="skill-info"><span>HTML / CSS / JavaScript</span><span>Mid-Level</span></div>
                     <div class="xp-track"><div class="xp-fill" style="width: 65%;"></div></div>
                 </div>
             </div>
@@ -145,7 +152,6 @@
             <div class="quest-card flagship-quest">
                 <div class="quest-badge completed">FLAGSHIP QUEST</div>
                 <div class="quest-image-placeholder">
-                    <!-- Drop project screenshot in assets/ticket-classifier.png -->
                     <img src="assets/ticket-classifier.png" alt="AI Support Ticket Classifier Screenshot" onerror="this.src='data:image/svg+xml;charset=UTF-8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'600\' height=\'300\'><rect width=\'100%\' height=\'100%\' fill=\'%23121420\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%2300f0ff\' font-family=\'Orbitron\' font-size=\'20\'>AI TICKET CLASSIFIER PREVIEW</text></svg>'">
                 </div>
                 <div class="quest-body">
@@ -287,7 +293,6 @@
                 </div>
             </div>
             <div class="contact-form-box">
-                <!-- Working frontend contact form (Formspree placeholder action or mailto fallback) -->
                 <form id="contactForm" action="https://formspree.io/f/joelvickyy@gmail.com" method="POST">
                     <div class="form-group">
                         <label for="senderName">&gt; YOUR_NAME:</label>
