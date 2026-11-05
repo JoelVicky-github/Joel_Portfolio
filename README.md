@@ -1,8 +1,8 @@
-\# 🕹️ Joel Vicky // Player Profile \& Portfolio
+# \# 🕹️ Joel Vicky // Player Profile \& Portfolio
 
 
 
-> \*\*"Aspiring AI-driven Full Stack Developer (learning in public)"\*\*
+#### > \*\*"**Aspiring AI-driven Full Stack Developer (learning in public)**"\*\*
 
 
 
@@ -14,7 +14,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 
 
-\## 🚀 Live Demo \& Preview
+###### \## **🚀 Live Demo \& Preview**
 
 \* \*\*Portfolio Website:\*\* \*(Add your GitHub Pages URL here once enabled, e.g., `https://joelvicky-github.github.io/Joel\_Portfolio/`)\*
 
@@ -24,7 +24,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 
 
-\## 🎮 Features \& UI Elements
+###### \## **🎮 Features \& UI Elements**
 
 \- \*\*Game HUD Navigation:\*\* Sticky top bar featuring interactive links, UI sound effects (SFX) toggle, and a dynamic scroll progress bar acting as an XP bar.
 
@@ -44,7 +44,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 
 
-\## 🛠️ Featured Quests (Projects Highlighted)
+###### **## 🛠️ Featured Quests (Projects Highlighted)**
 
 
 
@@ -70,7 +70,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 
 
-\## ⚙️ Tech Stack \& Architecture
+###### **## ⚙️ Tech Stack \& Architecture**
 
 \- \*\*HTML5\*\* (Semantic layout)
 
@@ -86,7 +86,7 @@ Welcome to the official repository for my personal portfolio website! Designed w
 
 
 
-\## 📂 Project Structure
+###### **## 📂 Project Structure**
 
 ```text
 
