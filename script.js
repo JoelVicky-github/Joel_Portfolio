@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("scroll", () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
+        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
         const xpBar = document.getElementById("xpBar");
         if (xpBar) {
             xpBar.style.width = scrolled + "%";
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(typeWriter, 35);
             }
         }
-        // Start typing after a brief moment
         setTimeout(typeWriter, 400);
     }
 
@@ -53,21 +52,57 @@ document.addEventListener("DOMContentLoaded", () => {
         skillObserver.observe(skillsSection);
     }
 
-    // --- 4. AUDIO / SFX TOGGLE (OFF BY DEFAULT) ---
-    let soundEnabled = false;
+    // --- 4. AUDIO: SFX & BGM TOGGLES (BOTH ON BY DEFAULT) ---
+    let soundEnabled = true;
+    let bgmEnabled = true;
+
     const soundToggleBtn = document.getElementById("soundToggle");
-    
-    // Simple synthesized Web Audio API beep generator for retro click feedback
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const bgmToggleBtn = document.getElementById("bgmToggle");
+    const bgMusic = document.getElementById("bgMusic");
+
+    if (bgMusic) {
+        bgMusic.volume = 0.25; // Comfortable background volume (25%)
+    }
+
+    // Try starting BGM immediately; if browser blocks autoplay, start on first user tap/click
+    function tryPlayBGM() {
+        if (bgmEnabled && bgMusic && bgMusic.paused) {
+            bgMusic.play().catch(() => {
+                // Waiting for user gesture
+            });
+        }
+    }
+    tryPlayBGM();
+
+    const unlockAudioOnFirstGesture = () => {
+        if (bgmEnabled && bgMusic && bgMusic.paused) {
+            bgMusic.play().catch(() => {});
+        }
+        if (audioCtx && audioCtx.state === "suspended") {
+            audioCtx.resume();
+        }
+        document.removeEventListener("click", unlockAudioOnFirstGesture);
+        document.removeEventListener("touchstart", unlockAudioOnFirstGesture);
+        document.removeEventListener("keydown", unlockAudioOnFirstGesture);
+    };
+
+    document.addEventListener("click", unlockAudioOnFirstGesture);
+    document.addEventListener("touchstart", unlockAudioOnFirstGesture, { passive: true });
+    document.addEventListener("keydown", unlockAudioOnFirstGesture);
+
+    // Web Audio API Synthesizer for Retro SFX
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = AudioContextClass ? new AudioContextClass() : null;
+
     function playBeep(frequency = 440, duration = 0.05) {
-        if (!soundEnabled) return;
+        if (!soundEnabled || !audioCtx) return;
         try {
-            if (audioCtx.state === 'suspended') {
+            if (audioCtx.state === "suspended") {
                 audioCtx.resume();
             }
             const oscillator = audioCtx.createOscillator();
             const gainNode = audioCtx.createGain();
-            oscillator.type = 'square';
+            oscillator.type = "square";
             oscillator.frequency.value = frequency;
             gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime);
             gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
@@ -76,27 +111,45 @@ document.addEventListener("DOMContentLoaded", () => {
             oscillator.start();
             oscillator.stop(audioCtx.currentTime + duration);
         } catch (e) {
-            // Audio context not allowed until user gesture
+            // Ignore if audio context not yet unlocked
         }
     }
 
+    // BGM Button Toggle
+    if (bgmToggleBtn) {
+        bgmToggleBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevents double-triggering unlock listener
+            bgmEnabled = !bgmEnabled;
+            if (bgmEnabled) {
+                bgmToggleBtn.textContent = "🎵 BGM: ON";
+                bgmToggleBtn.classList.add("active");
+                if (bgMusic) bgMusic.play().catch(() => {});
+                playBeep(523.25, 0.08);
+            } else {
+                bgmToggleBtn.textContent = "🎵 BGM: OFF";
+                bgmToggleBtn.classList.remove("active");
+                if (bgMusic) bgMusic.pause();
+                playBeep(329.63, 0.08);
+            }
+        });
+    }
+
+    // SFX Button Toggle
     if (soundToggleBtn) {
         soundToggleBtn.addEventListener("click", () => {
             soundEnabled = !soundEnabled;
             if (soundEnabled) {
                 soundToggleBtn.textContent = "🔊 SFX: ON";
-                soundToggleBtn.style.borderColor = "var(--neon-magenta)";
-                soundToggleBtn.style.color = "var(--neon-magenta)";
-                playBeep(587.33, 0.1); // High beep when turned on
+                soundToggleBtn.classList.add("active");
+                playBeep(587.33, 0.1);
             } else {
                 soundToggleBtn.textContent = "🔊 SFX: OFF";
-                soundToggleBtn.style.borderColor = "var(--neon-cyan)";
-                soundToggleBtn.style.color = "var(--neon-cyan)";
+                soundToggleBtn.classList.remove("active");
             }
         });
     }
 
-    // Attach click sound to interactive buttons
+    // Attach click SFX to all interactive buttons & links
     document.querySelectorAll(".arcade-btn, .hud-link, .social-btn, .quest-link-btn").forEach(btn => {
         btn.addEventListener("click", () => {
             playBeep(440, 0.05);
@@ -104,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 5. EASTER EGG: KONAMI CODE ---
-    let konamiCodeString = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
+    const konamiCodeString = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"];
     let konamiIndex = 0;
 
     window.addEventListener("keydown", (e) => {
@@ -127,13 +180,15 @@ document.addEventListener("DOMContentLoaded", () => {
         overlay.style.left = "0";
         overlay.style.width = "100%";
         overlay.style.height = "100%";
-        overlay.style.background = "rgba(0, 240, 255, 0.2)";
+        overlay.style.padding = "1.5rem";
+        overlay.style.background = "rgba(10, 11, 16, 0.9)";
         overlay.style.zIndex = "9999";
         overlay.style.display = "flex";
         overlay.style.justifyContent = "center";
         overlay.style.alignItems = "center";
+        overlay.style.textAlign = "center";
         overlay.style.fontFamily = "var(--font-heading)";
-        overlay.style.fontSize = "3rem";
+        overlay.style.fontSize = "clamp(1.5rem, 5vw, 3rem)";
         overlay.style.color = "var(--neon-cyan)";
         overlay.style.textShadow = "0 0 20px var(--neon-magenta)";
         overlay.innerHTML = "✨ LEVEL UP! SECRET EASTER EGG UNLOCKED ✨";
