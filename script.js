@@ -52,43 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
         skillObserver.observe(skillsSection);
     }
 
-    // --- 4. AUDIO: SFX & BGM TOGGLES (BOTH ON BY DEFAULT) ---
+    // --- 4. AUDIO: IMMEDIATE AUTOPLAY & ROBUST MOBILE USER-INTERACTION UNLOCK ---
     let soundEnabled = true;
     let bgmEnabled = true;
 
     const soundToggleBtn = document.getElementById("soundToggle");
     const bgmToggleBtn = document.getElementById("bgmToggle");
     const bgMusic = document.getElementById("bgMusic");
-
-    if (bgMusic) {
-        bgMusic.volume = 0.25; // Comfortable background volume (25%)
-    }
-
-    // Try starting BGM immediately; if browser blocks autoplay, start on first user tap/click
-    function tryPlayBGM() {
-        if (bgmEnabled && bgMusic && bgMusic.paused) {
-            bgMusic.play().catch(() => {
-                // Waiting for user gesture
-            });
-        }
-    }
-    tryPlayBGM();
-
-    const unlockAudioOnFirstGesture = () => {
-        if (bgmEnabled && bgMusic && bgMusic.paused) {
-            bgMusic.play().catch(() => {});
-        }
-        if (audioCtx && audioCtx.state === "suspended") {
-            audioCtx.resume();
-        }
-        document.removeEventListener("click", unlockAudioOnFirstGesture);
-        document.removeEventListener("touchstart", unlockAudioOnFirstGesture);
-        document.removeEventListener("keydown", unlockAudioOnFirstGesture);
-    };
-
-    document.addEventListener("click", unlockAudioOnFirstGesture);
-    document.addEventListener("touchstart", unlockAudioOnFirstGesture, { passive: true });
-    document.addEventListener("keydown", unlockAudioOnFirstGesture);
 
     // Web Audio API Synthesizer for Retro SFX
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
@@ -115,10 +85,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    if (bgMusic) {
+        bgMusic.volume = 0.25;
+        // Attempt immediate playback on load
+        bgMusic.play().catch(() => {});
+    }
+
+    // Robust listener for desktop & mobile: initiates music on first tap, touch, scroll, or keypress
+    const unlockEvents = ["touchstart", "touchend", "click", "scroll", "keydown"];
+    const unlockAudioOnFirstGesture = () => {
+        if (audioCtx && audioCtx.state === "suspended") {
+            audioCtx.resume();
+        }
+        if (bgmEnabled && bgMusic && bgMusic.paused) {
+            bgMusic.play().then(() => {
+                // Remove listeners only after mobile browser successfully confirms playback started
+                unlockEvents.forEach(evt => window.removeEventListener(evt, unlockAudioOnFirstGesture));
+            }).catch(() => {});
+        }
+    };
+
+    unlockEvents.forEach(evt => window.addEventListener(evt, unlockAudioOnFirstGesture, { passive: true }));
+
     // BGM Button Toggle
     if (bgmToggleBtn) {
         bgmToggleBtn.addEventListener("click", (e) => {
-            e.stopPropagation(); // Prevents double-triggering unlock listener
+            e.stopPropagation();
             bgmEnabled = !bgmEnabled;
             if (bgmEnabled) {
                 bgmToggleBtn.textContent = "🎵 BGM: ON";
@@ -136,7 +128,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // SFX Button Toggle
     if (soundToggleBtn) {
-        soundToggleBtn.addEventListener("click", () => {
+        soundToggleBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
             soundEnabled = !soundEnabled;
             if (soundEnabled) {
                 soundToggleBtn.textContent = "🔊 SFX: ON";
@@ -175,22 +168,21 @@ document.addEventListener("DOMContentLoaded", () => {
     function triggerEasterEgg() {
         playBeep(880, 0.3);
         const overlay = document.createElement("div");
-        overlay.style.position = "fixed";
-        overlay.style.top = "0";
-        overlay.style.left = "0";
-        overlay.style.width = "100%";
-        overlay.style.height = "100%";
-        overlay.style.padding = "1.5rem";
-        overlay.style.background = "rgba(10, 11, 16, 0.9)";
-        overlay.style.zIndex = "9999";
-        overlay.style.display = "flex";
-        overlay.style.justifyContent = "center";
-        overlay.style.alignItems = "center";
-        overlay.style.textAlign = "center";
-        overlay.style.fontFamily = "var(--font-heading)";
-        overlay.style.fontSize = "clamp(1.5rem, 5vw, 3rem)";
-        overlay.style.color = "var(--neon-cyan)";
-        overlay.style.textShadow = "0 0 20px var(--neon-magenta)";
+        overlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            padding: 1.5rem;
+            background: rgba(10, 11, 16, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: var(--font-heading);
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px var(--neon-magenta);
+        `;
         overlay.innerHTML = "✨ LEVEL UP! SECRET EASTER EGG UNLOCKED ✨";
         document.body.appendChild(overlay);
 
